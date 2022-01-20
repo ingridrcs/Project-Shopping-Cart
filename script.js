@@ -1,8 +1,6 @@
 // const { inherits } = require('mocha/lib/utils');
-
 // const getSavedCartItems = require("./helpers/getSavedCartItems");
 // const saveCartItems = require("./helpers/saveCartItems");
-
 // const { fetchItem } = require("./helpers/fetchItem");
 const addLi = document.querySelector('.cart__items');
 function createProductImageElement(imageSource) {
@@ -46,6 +44,7 @@ function createCartItemElement({ sku, name, salePrice }) {
   li.addEventListener('click', cartItemClickListener);
   return li;
 } 
+// Source: Consegui fazer o requisito através da ajuda do Mário que explicou passo a passo a ser feito.
 async function addProduct() {
   const findButtom = document.querySelectorAll('.item__add');
   return findButtom.forEach((buttom) => {
