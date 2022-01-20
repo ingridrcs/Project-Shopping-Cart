@@ -71,11 +71,10 @@ async function init() {
   const items = document.querySelector('.items');
   items.appendChild(elementProduct);
   });
+  addProduct(); 
   }
   
 window.onload = () => { 
   init();
-  addProduct();
-  saveCartItems();
-  getSavedCartItems(); 
+  
 };
