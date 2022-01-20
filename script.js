@@ -1,5 +1,8 @@
 // const { inherits } = require('mocha/lib/utils');
 
+const getSavedCartItems = require("./helpers/getSavedCartItems");
+const saveCartItems = require("./helpers/saveCartItems");
+
 // const { fetchItem } = require("./helpers/fetchItem");
 const addLi = document.querySelector('.cart__items');
 function createProductImageElement(imageSource) {
@@ -68,8 +71,11 @@ async function init() {
   const items = document.querySelector('.items');
   items.appendChild(elementProduct);
   });
-  // const finalObj = results.map((item) => item);
-  addProduct();
   }
   
-window.onload = () => { init(); };
+window.onload = () => { 
+  init();
+  addProduct();
+  saveCartItems();
+  getSavedCartItems(); 
+};

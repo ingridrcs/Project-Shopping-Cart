@@ -1,5 +1,6 @@
+// Source: Aula do Course 5.4 sobre Web Storage
 const getSavedCartItems = () => {
-  // seu código aqui
+  localStorage.getItem('cartItems');
 };
 
 if (typeof module !== 'undefined') {
