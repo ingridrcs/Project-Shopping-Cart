@@ -1,6 +1,9 @@
 // const { inherits } = require('mocha/lib/utils');
 // const getSavedCartItems = require("./helpers/getSavedCartItems");
 // const saveCartItems = require("./helpers/saveCartItems");
+
+//const saveCartItems = require("./helpers/saveCartItems");
+
 // const { fetchItem } = require("./helpers/fetchItem");
 const addLi = document.querySelector('.cart__items');
 function createProductImageElement(imageSource) {
@@ -35,6 +38,7 @@ function getSkuFromProductItem(item) {
 
 function cartItemClickListener(event) {
   event.target.remove();
+  saveCartItems(addLi.innerHTML);
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -56,6 +60,17 @@ async function addProduct() {
   });
 }
 
+function eraseAll() {
+const allLi = document.querySelector('.empty-cart');
+console.log(allLi);
+allLi.addEventListener('click', () => {
+const list = document.querySelectorAll('.cart__item');
+  return list.forEach((item) => {
+    item.remove();
+  });
+});
+}
+
 async function init() {
   const data = await fetchProducts();
   const { results } = data;
@@ -71,6 +86,7 @@ async function init() {
   items.appendChild(elementProduct);
   });
   addProduct(); 
+  eraseAll();
   }
   
 window.onload = () => { 
