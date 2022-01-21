@@ -1,9 +1,6 @@
 // const { inherits } = require('mocha/lib/utils');
 // const getSavedCartItems = require("./helpers/getSavedCartItems");
 // const saveCartItems = require("./helpers/saveCartItems");
-
-//const saveCartItems = require("./helpers/saveCartItems");
-
 // const { fetchItem } = require("./helpers/fetchItem");
 const addLi = document.querySelector('.cart__items');
 function createProductImageElement(imageSource) {
@@ -86,9 +83,9 @@ async function init() {
   items.appendChild(elementProduct);
   });
   addProduct(); 
-  eraseAll();
   }
   
 window.onload = () => { 
   init();
+  eraseAll();
 };
