@@ -1,7 +1,3 @@
-// const { inherits } = require('mocha/lib/utils');
-// const getSavedCartItems = require("./helpers/getSavedCartItems");
-// const saveCartItems = require("./helpers/saveCartItems");
-// const { fetchItem } = require("./helpers/fetchItem");
 const addLi = document.querySelector('.cart__items');
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -53,21 +49,30 @@ async function addProduct() {
     const itemId = await getSkuFromProductItem(event.target.parentNode);
     const { id: sku, title: name, price: salePrice } = await fetchItem(itemId);
       addLi.appendChild(createCartItemElement({ sku, name, salePrice }));
+      saveCartItems(addLi.innerHTML);
     });
   });
 }
-
+function emptyLocalStorage() {
+  addLi.innerHTML = '';
+  saveCartItems(addLi);
+}
 function eraseAll() {
 const allLi = document.querySelector('.empty-cart');
-console.log(allLi);
 allLi.addEventListener('click', () => {
 const list = document.querySelectorAll('.cart__item');
   return list.forEach((item) => {
     item.remove();
+    emptyLocalStorage();
   });
 });
 }
 
+function saveOnPage() {
+  const saveCard = getSavedCartItems();
+  addLi.innerHTML = saveCard;
+  addLi.childNodes.forEach((item) => item.addEventListener('click', cartItemClickListener));
+}
 async function init() {
   const data = await fetchProducts();
   const { results } = data;
@@ -88,4 +93,6 @@ async function init() {
 window.onload = () => { 
   init();
   eraseAll();
+  saveOnPage();
+  getSavedCartItems();
 };
