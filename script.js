@@ -67,16 +67,28 @@ const list = document.querySelectorAll('.cart__item');
   });
 });
 }
-
+// Source: Guthias tirou minha dúvida sobre o requisito 4.
 function saveOnPage() {
   const saveCard = getSavedCartItems();
   addLi.innerHTML = saveCard;
   addLi.childNodes.forEach((item) => item.addEventListener('click', cartItemClickListener));
 }
+function loading() {
+  const load = document.querySelector('.items');
+  const newP = document.createElement('p');
+  newP.className = 'loading';
+  newP.innerHTML = 'loading...';
+  load.appendChild(newP);
+}
+function removeLoading() {
+  const removeLoad = document.querySelector('.loading');
+  return removeLoad.remove();
+}
 async function init() {
+  loading();
   const data = await fetchProducts();
   const { results } = data;
-  console.log(results);
+  removeLoading();
   results.forEach((item) => {
   const {
     id: sku,
@@ -87,6 +99,7 @@ async function init() {
   const items = document.querySelector('.items');
   items.appendChild(elementProduct);
   });
+  
   addProduct(); 
   }
   
@@ -94,5 +107,4 @@ window.onload = () => {
   init();
   eraseAll();
   saveOnPage();
-  getSavedCartItems();
 };
